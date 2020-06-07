@@ -182,6 +182,31 @@ AUTH_COOKIE_SAMESITE = 'None'   # set to "Strict" if same domain for BE and FE
 
 
 
+# SOCIAL LOGIN
+
+AUTHENTICATION_BACKENDS = [
+    'social_core.backends.google.GoogleOAuth2',
+    'social_core.backends.facebook.FacebookOAuth2',
+    'django.contrib.auth.backends.ModelBackend',
+]
+
+SOCIAL_AUTH_GOOGLE_OAUTH2_KEY = getenv('GOOGLE_AUTH_KEY')  # client id from google cloud
+SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET = getenv('GOOGLE_AUTH_SECRET_KEY')  # client secret from google
+SOCIAL_AUTH_GOOGLE_OAUTH2_SCOPE = [
+    'https://www.googleapis.com/auth/userinfo.email',
+    'https://www.googleapis.com/auth/userinfo.profile',
+    'openid'
+]
+SOCIAL_AUTH_GOOGLE_OAUTH2_EXTRA_DATA = ['first_name', 'last_name']
+
+SOCIAL_AUTH_FACEBOOK_KEY = getenv('FACEBOOK_AUTH_KEY')           # App id in fb devellopers
+SOCIAL_AUTH_FACEBOOK_SECRET = getenv('FACEBOOK_AUTH_SECRET_KEY')   # App secret
+SOCIAL_AUTH_FACEBOOK_SCOPE = ['email']
+SOCIAL_AUTH_FACEBOOK_PROFILE_EXTRA_PARAMS = {
+    'fields': 'email, first_name, last_name'
+}
+
+
 # SMTP
 
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
@@ -191,3 +216,9 @@ EMAIL_HOST_PASSWORD= getenv('EMAIL_HOST_PASSWORD')
 EMAIL_PORT= getenv('EMAIL_PORT')
 EMAIL_USE_SSL=True
 
+
+
+# IDENTITY
+
+DOMAIN = getenv('DOMAIN')  ## Your front end domain
+SITE_NAME = 'Django Authentication'

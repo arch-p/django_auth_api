@@ -18,15 +18,8 @@ urlpatterns = [
     path('jwt/refresh/', CustomTokenRefreshView.as_view()),
     path('jwt/verify/', CustomTokenVerifyView.as_view()),
     path('logout/', LogoutView.as_view()),
-    re_path(
-        r'^o/(?P<provider>\S+)/$',
-        CustomProviderAuthView.as_view(),
-        name='provider-auth'
-    ),
 
     
-    
-    path('contact/' ,views.contacts , name='contacts_admin'),
 
     ]
  

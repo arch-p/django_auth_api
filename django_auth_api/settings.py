@@ -161,3 +161,33 @@ DJOSER = {
     'TOKEN_MODEL': None,
     'SOCIAL_AUTH_ALLOWED_REDIRECT_URIS': getenv('REDIRECT_URLS').split(',')
 }
+
+# DJANGO CORS
+
+CORS_ALLOWED_ORIGINS = getenv(
+    'CORS_ALLOWED_ORIGINS',
+    'http://localhost:3000,http://127.0.0.1:3000'  # all the front end domains allowed to access the api
+).split(',')
+CORS_ALLOW_CREDENTIALS = True  # To allow cookies between frontend and backend domains
+
+
+# AUTH COOKIES
+
+AUTH_COOKIE = 'access'  # Name of the cookie used for authentication  (same as token name in JWT header) 
+AUTH_COOKIE_MAX_AGE = 60 * 60 * 24 * 7
+AUTH_COOKIE_SECURE = getenv('AUTH_COOKIE_SECURE', 'True') == 'True'
+AUTH_COOKIE_HTTP_ONLY = True
+AUTH_COOKIE_PATH = '/'
+AUTH_COOKIE_SAMESITE = 'None'   # set to "Strict" if same domain for BE and FE
+
+
+
+# SMTP
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST= getenv('EMAIL_HOST') 
+EMAIL_HOST_USER= getenv('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD= getenv('EMAIL_HOST_PASSWORD')
+EMAIL_PORT= getenv('EMAIL_PORT')
+EMAIL_USE_SSL=True
+
